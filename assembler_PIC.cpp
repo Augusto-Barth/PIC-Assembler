@@ -227,11 +227,21 @@ int main(int argc, char *argv[]) {
     ofstream outputFile(outputName, ofstream::out);
 
     int tamanhoPrograma = (int)programa.size();
+    char linhaHex[3] = {0};
     for(int i = 0; i < tamanhoPrograma; i++){
         escreveInstrucao(outputFile, programa[i]);
         if(i != tamanhoPrograma - 1){
-            outputFile << ",\n";
+            outputFile << ",";
         }
+        else{
+            outputFile << " ";
+        }
+        sprintf(linhaHex, "%02X", i);
+        outputFile << " -- 0x" << linhaHex;
+        if(i != tamanhoPrograma - 1){
+            outputFile << "\n";
+        }
+
     }
     outputFile.close();
 
